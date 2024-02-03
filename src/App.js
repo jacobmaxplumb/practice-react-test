@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 
 const App = () => {
-  const [tasks, setTasks] = useState([
-    { id: 1, text: 'Learn React', completed: false },
-    { id: 2, text: 'Build a project', completed: false },
-  ]);
+  const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
 
   const addTask = () => {
     const nextId = tasks.length + 1;
     const task = { id: nextId, text: newTask, completed: false };
     setTasks([...tasks, task]);
+    setNewTask('');
   };
 
   const toggleCompletion = (id) => {
-    const task = tasks.find(task => task.id === id);
-    task.completed = !task.completed;
+    const updatedTasks = tasks.map(task => {
+      if (task.id === id) {
+        return { ...task, completed: !task.completed };
+      }
+      return task;
+    })
+    setTasks(updatedTasks);
   };
 
   return (
