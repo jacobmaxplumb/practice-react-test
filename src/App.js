@@ -14,13 +14,8 @@ const App = () => {
   };
 
   const toggleCompletion = (id) => {
-    const updatedTasks = tasks.map(task => {
-      if (task.id === id) {
-        task.completed = !task.completed;
-      }
-      return task;
-    });
-    setTasks(updatedTasks);
+    const task = tasks.find(task => task.id === id);
+    task.completed = !task.completed;
   };
 
   return (
